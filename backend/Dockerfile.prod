@@ -1,3 +1,4 @@
+<<<<<<< HEAD:Dockerfile.prod
 # Dockerfile.prod (backend)
 FROM node:18-alpine AS builder
 
@@ -16,3 +17,19 @@ COPY --from=builder /app /app
 RUN npm install --omit=dev
 
 CMD ["node", "dist/main"]
+=======
+
+FROM node:18-alpine AS builder
+
+WORKDIR /app
+COPY package*.json ./
+RUN npm install
+COPY . .
+RUN npm run build --configuration=production
+
+
+FROM nginx:alpine
+COPY --from=builder /app/dist/frontend/browser /usr/share/nginx/html
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
+>>>>>>> 47a84469ddf50c6c7e7da3d4de11cbf85d0672f0:frontend/Dockerfile.prod
