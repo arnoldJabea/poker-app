@@ -1,1 +1,51 @@
-/* You can add global styles to this file, and also import other style files */
+// imports scss files :
+@use './scss/class';
+@use './scss/_variables.scss';
+
+// Other styles of the application... :
+html,
+body {
+  height: 100%;
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  background-color: #eee;
+  // overflow-x: hidden;
+}
+
+// Fix Swal
+#fixSwal {
+  height: 100% !important;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Open Sans', sans-serif;
+}
+
+// Disable Material Calendar Button
+.mat-calendar-period-button {
+  display: none !important;
+}
+
+.mat-form-field-wrapper {
+  padding-bottom: 12px;
+}
+
+// Color off
+.disabled-color {
+  .mat-form-field-outline {
+    border-radius: 5px;
+    background-color: rgba(128, 128, 128, 0.2);
+    background-image: repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(255, 255, 255, 0.5) 35px, rgba(255, 255, 255, 0.5) 70px);
+  }
+
+  mat-label,
+  input,
+  mat-icon {
+    color: rgba(0, 0, 0, 0.87) !important;
+  }
+}
+
+// Removing hidden elements :
+[hidden] {
+  display: none !important;
+}
