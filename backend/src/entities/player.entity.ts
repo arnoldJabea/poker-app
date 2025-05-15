@@ -6,6 +6,9 @@ import { Entity, Column, PrimaryGeneratedColumn, AfterInsert } from 'typeorm';
 
 @Entity()
 export class Player {
+    name(name: any) {
+        throw new Error('Method not implemented.');
+    }
 
     @PrimaryGeneratedColumn()
     id: number

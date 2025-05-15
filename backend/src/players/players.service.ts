@@ -64,24 +64,23 @@ export class PlayersService {
   }
 
   async createAIPlayer(name: string, table: TableModel): Promise<Player> {
-    // Créer directement une instance de Player sans passer par le repository
     const player = new Player();
     player.username = name;
     player.isAI = true;
-    // Générer un ID unique
+
     let idExists = true;
     while (idExists) {
-      const newId = Math.floor(Math.random() * 100); // Generate a random ID
+      const newId = Math.floor(Math.random() * 100);
       const existingPlayer = await this.repo.findOne({ where: { id: newId } });
-      const existingAIPlayer = table ? table.players.find(player => player.id === newId && player.isAI) : undefined;
+      const existingAIPlayer = table?.players.find(p => p.id === newId && p.isAI);
       if (!existingPlayer && !existingAIPlayer) {
         player.id = newId;
         idExists = false;
       }
-      if (!existingPlayer) {
-        player.id = newId;
-        idExists = false;
-      }
+    }
+
+    if (table?.players) {
+      table.players.push(player);
     }
 
     return player;
