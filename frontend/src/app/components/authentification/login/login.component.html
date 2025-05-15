@@ -1,0 +1,59 @@
+<!-- Main container of the page -->
+<div class="container h-80">
+
+  <!-- Main container that positions the content vertically -->
+  <div class="row v-flex hv-center">
+
+    <!-- Centered container for the connection card -->
+    <div class="row hv-center">
+
+      <!-- Connection card with fixed width -->
+      <mat-card class="w-50 card_login">
+        <h1 class="text-center">Connexion</h1>
+
+        <!-- Login form linked to "loginForm" -->
+        <form [formGroup]="loginForm" (ngSubmit)="login()" class="login-form">
+          <mat-card>
+            <mat-toolbar color="primary">Connexion</mat-toolbar>
+
+            <mat-card-content>
+
+              <!-- Champ username -->
+              <mat-form-field class="form_username ml-2 mr-2" appearance="outline">
+                <mat-label>Nom d'utilisateur</mat-label>
+                <input matInput placeholder="Entrez votre nom d'utilisateur" formControlName="username" />
+                <mat-error *ngIf="loginForm.get('username')?.hasError('required')">
+                  Le nom d'utilisateur est requis
+                </mat-error>
+              </mat-form-field>
+
+              <!-- Champ mot de passe -->
+              <mat-form-field class="form_mdp ml-2 mr-2" appearance="outline">
+                <mat-label>Mot de passe</mat-label>
+                <input matInput [type]="passwordInputType" formControlName="password"
+                  placeholder="Entrez votre mot de passe" />
+                <button type="button" mat-icon-button matSuffix (click)="togglePasswordVisibility()"
+                  [attr.aria-label]="'Afficher/Masquer mot de passe'">
+                  <mat-icon>{{ passwordVisibility }}</mat-icon>
+                </button>
+                <mat-error *ngIf="loginForm.get('password')?.hasError('required')">
+                  Le mot de passe est requis
+                </mat-error>
+              </mat-form-field>
+
+            </mat-card-content>
+
+            <mat-card-actions class="action-buttons">
+              <button mat-flat-button color="primary" type="submit" [disabled]="loginForm.invalid">
+                Se connecter
+              </button>
+            </mat-card-actions>
+          </mat-card>
+        </form>
+
+      </mat-card>
+    </div>
+
+  </div>
+
+</div>

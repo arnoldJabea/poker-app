@@ -15,6 +15,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 
 import { Subscription } from 'rxjs';
 
+import { AuthService } from '../../../services/auth/auth.service';
+
 // =====================================================================
 // Header Component Declaration
 // =====================================================================
@@ -33,31 +35,110 @@ import { Subscription } from 'rxjs';
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit, OnDestroy {
+
+  // -------------------------------------------------------------------
+  // Attributes and instance variables
+  // -------------------------------------------------------------------
+  @ViewChild('sidenav') sidenav!: ElementRef<HTMLDivElement>;
+
+  @Inject(MAT_DIALOG_DATA) public element: any
+
+  private sessionSubscription!: Subscription;
+
+  session = {
+    prenom: '',
+    nom: '',
+    role: '',
+    isAuthenticated: false
+  };
 
   // -------------------------------------------------------------------
   // Component constructor
   // -------------------------------------------------------------------
   constructor(
-    private router: Router
+    private router: Router,
+    private dialog: MatDialog,
+    private authService: AuthService
   ) {}
+
+  // -------------------------------------------------------------------
+  // Access methods
+  // Checks if the user has the specified role
+  // -------------------------------------------------------------------
+  canAccess(role: string): boolean {
+    return this.session.role === role;
+  }
+
+  // -------------------------------------------------------------------
+  // User Logout
+  // Calls the logout service and then redirects to the login page
+  // -------------------------------------------------------------------
+  async logout() {
+    try {
+      await this.authService.logout();
+      this.session.isAuthenticated = false;
+      this.session.role = '';
+      this.router.navigate(['/authentification/login']);
+    } catch (error) {
+      console.error('Erreur lors de la déconnexion :', error);
+    }
+  }
+
+  // -------------------------------------------------------------------
+  // Side menu management (sidenav)
+  // -------------------------------------------------------------------
+  openSidenav() {
+    if (this.sidenav) {
+      this.sidenav.nativeElement.style.width = '100vw';
+    }
+  }
+
+  closeSidenav() {
+    if (this.sidenav) {
+      this.sidenav.nativeElement.style.width = '0';
+    }
+  }
 
   // -------------------------------------------------------------------
   // Redirects to different pages
   // -------------------------------------------------------------------
   redirectHome() {
-    this.router.navigate(['/accueil']);
+    this.router.navigate(['/home']);
   }
 
   // -------------------------------------------------------------------
   // Redirects for registration and login
   // -------------------------------------------------------------------
   redirectRegister() {
-    this.router.navigate(['/authentification/register/register-main']);
+    this.router.navigate(['/authentification/register']);
   }
 
   redirectLogin() {
     this.router.navigate(['/authentification/login']);
+  }
+
+  // -------------------------------------------------------------------
+  // Component Lifecycle: Initialization
+  // Subscription to session changes
+  // -------------------------------------------------------------------
+  async ngOnInit() {
+    this.sessionSubscription = this.authService.session$.subscribe(
+      (session) => {
+        this.session = session;
+      }
+    );
+  }
+
+  // -------------------------------------------------------------------
+  // Component lifecycle: Destruction
+  // Clean up subscriptions to avoid memory leaks
+  // -------------------------------------------------------------------
+
+  ngOnDestroy() {
+    if (this.sessionSubscription) {
+      this.sessionSubscription.unsubscribe();
+    }
   }
 
 }
