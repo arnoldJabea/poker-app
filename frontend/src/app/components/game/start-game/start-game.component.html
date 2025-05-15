@@ -10,7 +10,7 @@
       <!-- Card containing the General Registration form -->
       <mat-card class="w-50 card_start_game">
         <h1 class="text-center">Demarrer une partie</h1>
-        <p>Veuilliez remplir les champs obligatoire avant d’y jouer !</p>
+        <p class="text-center">Veuilliez remplir les champs obligatoire avant d’y jouer !</p>
 
         <!-- Reactive form linked to "startGameForm" -->
         <form class="row v-flex" [formGroup]="startGameForm" (ngSubmit)="startGame()">
@@ -73,7 +73,7 @@
           <div class="row hv-center mb-3">
             <button class="bouton_inscrire" type="submit" mat-raised-button color="primary"
               [disabled]="!startGameForm.valid || isSubmitting">
-              S'inscrire
+              Lancer la partie
             </button>
           </div>
 

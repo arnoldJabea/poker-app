@@ -24,6 +24,8 @@ import { LoginComponent } from './components/authentification/login/login.compon
 // ---------------------------------------------------------------------
 import { isAuthorizedGuard } from './guards/IsAuthorized/is-authorized.guard';
 import { Roles } from './guards/IsAuthorized/roles';
+import { StartGameComponent } from './components/game/start-game/start-game.component';
+import { GameInProgressComponent } from './components/game/game-in-progress/game-in-progress.component';
 
 /*****************************************************************************************************/
 // =====================================================================
@@ -39,6 +41,30 @@ export const routes: Routes = [
   // Routes for displaying static or main pages
   // ---------------------------------------------------------------------
   { path: 'home', component: HomeComponent },
+
+  // ---------------------------------------------------------------------
+  // Game routes
+  // ---------------------------------------------------------------------
+  {
+    path: 'game/start-game',
+    component: StartGameComponent,
+    canActivate: [isAuthorizedGuard],
+    data: {
+      authorize: [Roles.NonLoggedUser],
+      minimunRoleMode: false,
+      fallbackRoute: 'login',
+    },
+  },
+    {
+    path: 'game/game-in-progress',
+    component: GameInProgressComponent,
+    canActivate: [isAuthorizedGuard],
+    data: {
+      authorize: [Roles.NonLoggedUser],
+      minimunRoleMode: false,
+      fallbackRoute: 'login',
+    },
+  },
 
   // ---------------------------------------------------------------------
   // Authentication routes (registration and login)

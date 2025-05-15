@@ -90,7 +90,7 @@ export class StartGameComponent {
         duration_game: this.startGameForm.value.duration_game ?? ''
       };
 
-      await this.tablesService.create(newGame);
+      // await this.tablesService.create(newGame);
       this.snackBar.open("Les informations ont bien été enregistrée et pris en comptes !", "Fermer", {
         duration: 5000,
         panelClass: ['snackbar-success'],

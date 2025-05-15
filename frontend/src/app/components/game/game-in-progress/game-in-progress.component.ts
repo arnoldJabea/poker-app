@@ -7,5 +7,5 @@ import { Component } from '@angular/core';
   styleUrl: './game-in-progress.component.scss'
 })
 export class GameInProgressComponent {
-
+  players = new Array(10).fill({});
 }

@@ -31,5 +31,18 @@ import { MatIconModule } from '@angular/material/icon';
   styleUrl: './home.component.scss'
 })
 export class HomeComponent {
+  // -------------------------------------------------------------------
+  // Component constructor
+  // -------------------------------------------------------------------
+  constructor(
+    private router: Router
+  ) {}
+
+  // -------------------------------------------------------------------
+  // Redirects to different pages
+  // -------------------------------------------------------------------
+  redirectStartGame() {
+    this.router.navigate(['/game/start-game']);
+  }
 
 }

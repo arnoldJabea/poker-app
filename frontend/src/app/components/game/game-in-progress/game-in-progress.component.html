@@ -1,1 +1,13 @@
-<p>game-in-progress works!</p>
+<div class="game-in-progress">
+  <h2>Partie Poker n°X en cours</h2>
+  <p>Veuillez attendre que la partie se termine avant de rejoindre une table ou démarrer une partie !</p>
+  <!-- La table de poker avec une disposition circulaire des joueurs.
+       Le positionnement en cercle se fera via le CSS (SCSS) -->
+  <div class="poker-table">
+    <!-- On boucle sur une liste de 10 joueurs pour afficher l'icône du joueur et celle de la carte -->
+    <div class="player" *ngFor="let player of players; let i = index">
+      <img class="player-icon" src="assets/player-icon.png" alt="Icône joueur" />
+      <img class="card-icon" src="assets/card-icon.png" alt="Carte du joueur" />
+    </div>
+  </div>
+</div>
