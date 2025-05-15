@@ -1,0 +1,93 @@
+<!-- Main container of the page -->
+<div class="container">
+
+  <!-- Main container of the registration form -->
+  <div class="row v-flex hv-center mt-4 mb-4">
+
+    <!-- Centered area for registration card -->
+    <div class="row hv-center">
+
+      <!-- Card containing the General Registration form -->
+      <mat-card class="w-50 card_start_game">
+        <h1 class="text-center">Demarrer une partie</h1>
+        <p>Veuilliez remplir les champs obligatoire avant d’y jouer !</p>
+
+        <!-- Reactive form linked to "startGameForm" -->
+        <form class="row v-flex" [formGroup]="startGameForm" (ngSubmit)="startGame()">
+
+          <!-- "Nom de la partie" field -->
+          <mat-form-field appearance="outline" class="form_name_game ml-2 mr-2">
+            <mat-label>Nom de la partie</mat-label>
+            <input matInput type="text" formControlName="name_game" />
+            <mat-error *ngIf="startGameForm.get('name_game')?.hasError('required')">
+              Le nom de la partie est <strong>requis</strong>.
+            </mat-error>
+          </mat-form-field>
+
+          <!-- "Nombre de joueurs" field -->
+          <mat-form-field class="form_number_players ml-2 mr-2" appearance="outline">
+            <mat-label>Nombre de joueurs</mat-label>
+            <input matInput type="text" formControlName="number_players" />
+            <mat-error *ngIf="startGameForm.get('number_players')?.hasError('required')">
+              Le nombre de joueurs est <strong>requis</strong>.
+            </mat-error>
+          </mat-form-field>
+
+          <!-- "Mise de départ" field -->
+          <mat-form-field class="form_starting_bet ml-2 mr-2" appearance="outline">
+            <mat-label>Mise de départ</mat-label>
+            <input matInput type="text" formControlName="starting_bet" />
+            <mat-error *ngIf="startGameForm.get('starting_bet')?.hasError('required')">
+              La mise de départ est <strong>requis</strong>.
+            </mat-error>
+          </mat-form-field>
+
+          <!-- "Limite de mise" field -->
+          <mat-form-field class="form_betting_limit ml-2 mr-2" appearance="outline">
+            <mat-label>Limite de mise</mat-label>
+            <input matInput type="text" formControlName="betting_limit" />
+            <mat-error *ngIf="startGameForm.get('betting_limit')?.hasError('required')">
+              La limite de mise est <strong>requis</strong>.
+            </mat-error>
+          </mat-form-field>
+
+          <!-- "Mode de jeu" field -->
+          <mat-form-field class="form_pays ml-2 mr-2" appearance="outline">
+            <mat-label>Mode de jeu</mat-label>
+            <input matInput type="text" formControlName="game_mode" />
+            <mat-error *ngIf="startGameForm.get('game_mode')?.hasError('required')">
+              Le mode de jeu est <strong>requis</strong>.
+            </mat-error>
+          </mat-form-field>
+
+          <!-- "Durée de la partie" field -->
+          <mat-form-field class="form_pays ml-2 mr-2" appearance="outline">
+            <mat-label>Durée de la partie</mat-label>
+            <input matInput type="text" formControlName="duration_game" />
+            <mat-error *ngIf="startGameForm.get('duration_game')?.hasError('required')">
+              La durée de la partie est <strong>requis</strong>.
+            </mat-error>
+          </mat-form-field>
+
+          <!-- Form submit button -->
+          <div class="row hv-center mb-3">
+            <button class="bouton_inscrire" type="submit" mat-raised-button color="primary"
+              [disabled]="!startGameForm.valid || isSubmitting">
+              S'inscrire
+            </button>
+          </div>
+
+        </form>
+
+      </mat-card>
+
+    </div>
+
+    <!-- Indication of mandatory fields -->
+    <div class="ml-2 mr-2 mb-2">
+      <p>( * ) Champs obligatoires.</p>
+    </div>
+
+  </div>
+
+</div>
