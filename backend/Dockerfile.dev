@@ -1,31 +1,11 @@
-<<<<<<< HEAD:Dockerfile.dev
 # Dockerfile.dev ( for my backend)
-=======
-# Dockerfile.dev (Angular)
->>>>>>> 47a84469ddf50c6c7e7da3d4de11cbf85d0672f0:frontend/Dockerfile.dev
 FROM node:18-alpine
 
 WORKDIR /app
 
-<<<<<<< HEAD:Dockerfile.dev
-
 COPY package*.json ./
-
 
 RUN npm install
 
-
 COPY . .
-
-
 CMD ["npm", "run", "start:dev"]
-=======
-COPY package*.json ./
-RUN npm install
-
-COPY . .
-
-EXPOSE 4200
-
-CMD ["npm", "run", "start"]
->>>>>>> 47a84469ddf50c6c7e7da3d4de11cbf85d0672f0:frontend/Dockerfile.dev

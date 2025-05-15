@@ -1,38 +1,54 @@
-import { Exclude } from "class-transformer";
-import { Player } from "src/entities/player.entity";
-import { Deck } from "src/tables/entities/deck.entity";
-import { Card } from "./card.entity";
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
+import { Player } from 'src/entities/player.entity';
+import { Card } from './card.entity';
+import { Exclude } from 'class-transformer';
+import { Deck } from './deck.entity';
 
+@Entity()
 export class Table {
-    constructor(id: number) {
-        this.id = id;
-        this.name = "Table " + id;
-        this.deck = new Deck()
-        this.players = [] as Player[]
-    }
+  constructor() {
+    this.deck = new Deck();             // logique mémoire
+    this.players = [];                  // logique mémoire
+    this.river = [];                    // logique mémoire
+  }
 
-    id: number
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @Exclude()
-    deck: Deck;
+  @Column()
+  name: string;
 
-    players: Player[];
+  @Column({ default: 20 })
+  bigBlind: number;
 
-    name: string;
+  @Column({ default: 0 })
+  pot: number;
 
-    river: Card[] = [];
+  @Column({ default: 0 })
+  currentBet: number;
 
-    pot: number = 0;
+  @Column({ default: 0 })
+  currentTurn: number;
 
-    currentBet: number = 0;
+  @Column({ default: 0 })
+  round: number;
 
-    currentTurn: number = 0;
+  @Column({ default: 0 })
+  currentRound: number;
 
-    round: number = 0;
+  @Column({ default: 0 })
+  currentPlayerIndex: number;
 
-    currentRound: number = 0;
+  @Column({ default: 0 })
+  dealerIndex: number;
 
-    currentPlayerIndex: number;
+ 
+  @Exclude()
+  deck: Deck;
 
-    dealerIndex: number;
+  @Exclude()
+  players: Player[];
+
+  @Exclude()
+  river: Card[];
 }
