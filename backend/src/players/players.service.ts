@@ -1,11 +1,11 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { Player } from 'src/entities/player.entity';
+import { Player } from '../entities/player.entity';
 import * as bcrypt from 'bcrypt';
 import { BadRequestException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { Table } from 'src/tables/entities/table.entity';
+import { TableModel } from '../tables/models/table.model';
 
 @Injectable()
 export class PlayersService {
@@ -60,11 +60,10 @@ export class PlayersService {
       throw new BadRequestException("User not found");
     }
     user.state = name;
-    // Supprimer la sauvegarde pour ne pas persister le state dynamique
-    // this.repo.save(user);
+
   }
 
-  async createAIPlayer(name: string, table: Table): Promise<Player> {
+  async createAIPlayer(name: string, table: TableModel): Promise<Player> {
     // Créer directement une instance de Player sans passer par le repository
     const player = new Player();
     player.username = name;
@@ -97,6 +96,7 @@ export class PlayersService {
     }
     player.username = playerData.username;
     player.money = playerData.money;
+    player.id = playerData.id;
     return player;
   }
 

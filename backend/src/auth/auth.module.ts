@@ -6,7 +6,7 @@ import { AuthController } from './auth.controller';
 import { jwtConstants } from './constant';
 import { APP_GUARD } from '@nestjs/core';
 import { AuthGuard } from './AuthGuard';
-import { PlayersModule } from 'src/players/players.module';
+import { PlayersModule } from '../players/players.module';
 
 @Module({
   imports: [

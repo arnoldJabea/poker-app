@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { Deck } from 'src/tables/entities/deck.entity';
-import { Card } from 'src/tables/entities/card.entity';
+import { Deck } from '../tables/entities/deck.entity';
+import { Card } from '../tables/entities/card.entity';
 
 @Injectable()
 export class DeckService {

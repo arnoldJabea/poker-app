@@ -1,7 +1,7 @@
 
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { PlayersService } from 'src/players/players.service';
+import { PlayersService } from '../players/players.service';
 import { BadRequestException } from '@nestjs/common';
 import * as bcrypt from 'bcrypt';
 

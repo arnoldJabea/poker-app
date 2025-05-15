@@ -11,10 +11,10 @@ import { Request as ExpressRequest } from 'express';
 
 import { AuthGuard } from './AuthGuard';
 import { AuthService } from './auth.service';
-import { Public } from 'src/decorators/public.decorator';
-import { PlayersService } from 'src/players/players.service';
-import { PlayerDto } from 'src/players/dto/players.dto';
-import { Player } from 'src/entities/player.entity';
+import { Public } from '../decorators/public.decorator';
+import { PlayersService } from '../players/players.service';
+import { PlayerDto } from '../players/dto/players.dto';
+import { Player } from '../entities/player.entity';
 import {ApiBearerAuth} from '@nestjs/swagger';
 
 
