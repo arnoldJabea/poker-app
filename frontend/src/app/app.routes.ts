@@ -12,6 +12,8 @@ import { RouterModule, Routes } from '@angular/router';
 // Importing components (pages and features)
 // ---------------------------------------------------------------------
 import { HomeComponent } from './components/home/home.component';
+import { RegisterComponent } from './components/authentification/register/register.component';
+import { LoginComponent } from './components/authentification/login/login.component';
 
 // =====================================================================
 //                    IMPORTS OF GUARDS AND ROLES
@@ -20,8 +22,8 @@ import { HomeComponent } from './components/home/home.component';
 // ---------------------------------------------------------------------
 // Guard for authorization management and role definition
 // ---------------------------------------------------------------------
-// import { isAuthorizedGuard } from './guards/IsAuthorized/is-authorized.guard';
-// import { Roles } from './guards/IsAuthorized/roles';
+import { isAuthorizedGuard } from './guards/IsAuthorized/is-authorized.guard';
+import { Roles } from './guards/IsAuthorized/roles';
 
 /*****************************************************************************************************/
 // =====================================================================
@@ -36,8 +38,31 @@ export const routes: Routes = [
   // ---------------------------------------------------------------------
   // Routes for displaying static or main pages
   // ---------------------------------------------------------------------
-  { path: 'home', component: HomeComponent }
+  { path: 'home', component: HomeComponent },
 
+  // ---------------------------------------------------------------------
+  // Authentication routes (registration and login)
+  // ---------------------------------------------------------------------
+  {
+    path: 'authentification/register',
+    component: RegisterComponent,
+    canActivate: [isAuthorizedGuard],
+    data: {
+      authorize: [Roles.NonLoggedUser],
+      minimunRoleMode: false,
+      fallbackRoute: 'home',
+    },
+  },
+  {
+    path: 'authentification/login',
+    component: LoginComponent,
+    canActivate: [isAuthorizedGuard],
+    data: {
+      authorize: [Roles.NonLoggedUser],
+      minimunRoleMode: false,
+      fallbackRoute: 'home',
+    },
+  }
 ];
 
 /*****************************************************************************************************/
