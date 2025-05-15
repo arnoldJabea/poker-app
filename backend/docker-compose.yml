@@ -10,7 +10,7 @@ services:
       - ./backend:/app
       - /app/node_modules
     ports:
-      - "3000:3000"
+      - '3000:3000'
     environment:
       - NODE_ENV=development
     command: npm run start:dev
@@ -21,7 +21,7 @@ services:
       context: ./backend
       dockerfile: Dockerfile.prod
     ports:
-      - "3001:3000"
+      - '3001:3000'
     environment:
       - NODE_ENV=production
     restart: unless-stopped
@@ -35,7 +35,7 @@ services:
       - ./frontend:/app
       - /app/node_modules
     ports:
-      - "4200:4200"
+      - '4200:4200'
     environment:
       - CHOKIDAR_USEPOLLING=true
     command: npm run start
@@ -46,5 +46,5 @@ services:
       context: ./frontend
       dockerfile: Dockerfile.prod
     ports:
-      - "80:80"
+      - '80:80'
     restart: unless-stopped

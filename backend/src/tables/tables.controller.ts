@@ -22,7 +22,7 @@ import { Public } from '../decorators/public.decorator';
 })
 @ApiResponse({ status: 403, description: 'Forbidden.' })
 export class TablesController {
-  constructor(private readonly tablesService: TablesService) { }
+  constructor(private readonly tablesService: TablesService) {}
 
   @Public()
   @Get('')
@@ -68,7 +68,10 @@ export class TablesController {
   }
 
   @Get(':id/actions')
-  @ApiResponse({ status: 201, description: 'The record has been successfully created.' })
+  @ApiResponse({
+    status: 201,
+    description: 'The record has been successfully created.',
+  })
   @ApiResponse({ status: 403, description: 'Forbidden.' })
   actions(@Param('id') tableId: number, @Request() req: any) {
     const playerId = req.player.userId;
@@ -76,13 +79,26 @@ export class TablesController {
   }
 
   @Get(':id/actions/:action/:amount')
-  @ApiResponse({ status: 201, description: 'The record has been successfully created.' })
+  @ApiResponse({
+    status: 201,
+    description: 'The record has been successfully created.',
+  })
   @ApiResponse({ status: 403, description: 'Forbidden.' })
-  actionWithAmount(@Request() req: any, @Param('id') tableId: number, @Param('action') action: string, @Param('amount') amount?: string) {
+  actionWithAmount(
+    @Request() req: any,
+    @Param('id') tableId: number,
+    @Param('action') action: string,
+    @Param('amount') amount?: string,
+  ) {
     const playerId = req.player.userId;
 
     const parsedAmount = amount ? Number(amount) : undefined;
-    return this.tablesService.processHumanMove(tableId, playerId, action, parsedAmount);
+    return this.tablesService.processHumanMove(
+      tableId,
+      playerId,
+      action,
+      parsedAmount,
+    );
     // return this.tablesService.actions(tableId, playerId, action);
   }
 
@@ -98,6 +114,11 @@ export class TablesController {
     @Request() req: any,
   ) {
     const playerId = req.player.userId;
-    return this.tablesService.processHumanMove(tableId, playerId, action, undefined);
+    return this.tablesService.processHumanMove(
+      tableId,
+      playerId,
+      action,
+      undefined,
+    );
   }
 }

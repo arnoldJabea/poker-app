@@ -7,9 +7,9 @@ import { Deck } from './deck.entity';
 @Entity()
 export class Table {
   constructor() {
-    this.deck = new Deck();             // logique mémoire
-    this.players = [];                  // logique mémoire
-    this.river = [];                    // logique mémoire
+    this.deck = new Deck(); // logique mémoire
+    this.players = []; // logique mémoire
+    this.river = []; // logique mémoire
   }
 
   @PrimaryGeneratedColumn()
@@ -42,7 +42,6 @@ export class Table {
   @Column({ default: 0 })
   dealerIndex: number;
 
- 
   @Exclude()
   deck: Deck;
 

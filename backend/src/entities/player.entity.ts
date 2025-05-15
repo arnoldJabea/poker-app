@@ -3,37 +3,35 @@ import { IsNumber } from 'class-validator';
 import { Card } from 'src/tables/entities/card.entity';
 import { Entity, Column, PrimaryGeneratedColumn, AfterInsert } from 'typeorm';
 
-
 @Entity()
 export class Player {
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @PrimaryGeneratedColumn()
-    id: number
+  @Column()
+  username: string;
 
-    @Column()
-    username: string;
+  @Column()
+  @Exclude()
+  password: string = '';
 
-    @Column()
-    @Exclude()
-    password: string = '';
+  state: string = '';
 
-    state: string = '';
+  @IsNumber()
+  @Column({ default: 1000 })
+  money: number = 1000;
 
-    @IsNumber()
-    @Column({ default: 1000 })
-    money: number = 1000;
+  bet: number = 0;
 
-    bet: number = 0;
+  hand: Card[] = [];
 
-    hand: Card[] = [];
+  tableId: number | undefined;
 
-    tableId: number | undefined;
+  isAI: boolean = false;
 
-    isAI: boolean = false;
-
-    @AfterInsert()
-    after_insert() { //Se déclenche automatiquement après l'insertion
-        console.log(`Player ${this.id} created`)
-    }
-
+  @AfterInsert()
+  after_insert() {
+    //Se déclenche automatiquement après l'insertion
+    console.log(`Player ${this.id} created`);
+  }
 }

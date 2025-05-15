@@ -3,39 +3,34 @@ import { Card } from 'src/tables/entities/card.entity';
 import { Player } from 'src/entities/player.entity';
 import { ApiProperty } from '@nestjs/swagger';
 
-
-
-
 export class PlayerDto {
-    @IsString()
-    @IsNotEmpty()
-    @ApiProperty()
-    username: string;
+  @IsString()
+  @IsNotEmpty()
+  @ApiProperty()
+  username: string;
 
-    // @IsString()
-    // @IsNotEmpty()
-    // @ApiProperty()
-    // @IsString()
-    // @IsNotEmpty()
-    // password: string;
+  // @IsString()
+  // @IsNotEmpty()
+  // @ApiProperty()
+  // @IsString()
+  // @IsNotEmpty()
+  // password: string;
 
-    @IsNumber()
-    @IsNotEmpty()
-    @ApiProperty()
-    money: number;
+  @IsNumber()
+  @IsNotEmpty()
+  @ApiProperty()
+  money: number;
 
-    @IsString()
-    @IsNotEmpty()
-    @ApiProperty()
-    state: string;
+  @IsString()
+  @IsNotEmpty()
+  @ApiProperty()
+  state: string;
 
-    @IsString()
-    @ApiProperty()
-    hand?: Card[];
+  @IsString()
+  @ApiProperty()
+  hand?: Card[];
 
-    constructor(partial: Partial<PlayerDto>) {
-        Object.assign(this, partial);
-    }
-
-
+  constructor(partial: Partial<PlayerDto>) {
+    Object.assign(this, partial);
+  }
 }

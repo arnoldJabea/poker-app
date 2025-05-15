@@ -1,6 +1,7 @@
 # API POKER
 
 ## Sommaire
+
 - [Description](#description)
 - [Technologies utilisées](#technologies-utilisées)
 - [Installation et démarrage](#demarrage)
@@ -13,6 +14,7 @@
 Ce projet est une API de poker développée en duo dans le cadre de notre formation chez MyDigitalSchool. L'API permet de simuler des parties, les joueurs et les mises, tout en respectant les règles du texas holdem. Ce projet s'inscrit dans le cadre du cours de Développement API.
 
 ## Technologies utilisées
+
 Ce projet utilise les technologies suivantes :
 
 - **NestJS**
@@ -22,7 +24,9 @@ Ce projet utilise les technologies suivantes :
 ## Installation et démarrage
 
 ### 1. Prérequis
+
 Avant l'installation, assurez-vous d'avoir les éléments suivants :
+
 - Node.js
 - npm
 
@@ -33,11 +37,13 @@ $ git clone https://github.com/benjamin-bou/Poker-API.git
 ```
 
 ### 3. Installez les dépendances
+
 ```bash
 $ npm install
 ```
 
 ### 4. Lancer l'application
+
 ```bash
 $ npm run start:dev
 ```
@@ -45,7 +51,6 @@ $ npm run start:dev
 ## Routes de L'API
 
 ![Tableau des routes](./assets/images/routes_table.png)
-
 
 ## Fonctionnalités
 
@@ -62,5 +67,6 @@ $ npm run start:dev
 - Trouver de l'argent
 
 ## Auteurs
+
 - Pazhang Behnood
 - Boutrois Benjamin

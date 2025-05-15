@@ -1,4 +1,3 @@
-
 import { Module } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { JwtModule } from '@nestjs/jwt';
@@ -17,10 +16,8 @@ import { PlayersModule } from '../players/players.module';
       signOptions: { expiresIn: '3660s' },
     }),
   ],
-  providers: [AuthService,
-    { provide: APP_GUARD, useClass: AuthGuard }
-  ],
+  providers: [AuthService, { provide: APP_GUARD, useClass: AuthGuard }],
   controllers: [AuthController],
   exports: [AuthService],
 })
-export class AuthModule { }
+export class AuthModule {}

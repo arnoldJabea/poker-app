@@ -12,4 +12,4 @@ import { Player } from '../entities/player.entity';
   providers: [TablesService, DeckService, PlayersService],
   exports: [TablesService],
 })
-export class TablesModule { }
+export class TablesModule {}

@@ -5,7 +5,7 @@ import {
   HttpCode,
   HttpStatus,
   Post,
-  Request
+  Request,
 } from '@nestjs/common';
 import { Request as ExpressRequest } from 'express';
 
@@ -15,12 +15,14 @@ import { Public } from '../decorators/public.decorator';
 import { PlayersService } from '../players/players.service';
 import { PlayerDto } from '../players/dto/players.dto';
 import { Player } from '../entities/player.entity';
-import {ApiBearerAuth} from '@nestjs/swagger';
-
+import { ApiBearerAuth } from '@nestjs/swagger';
 
 @Controller('auth')
 export class AuthController {
-  constructor(private authService: AuthService, private playerService: PlayersService) { }
+  constructor(
+    private authService: AuthService,
+    private playerService: PlayersService,
+  ) {}
 
   @Public()
   @HttpCode(HttpStatus.OK)
@@ -36,7 +38,6 @@ export class AuthController {
     return this.playerService.create(player);
   }
 
-  
   @Get('profile')
   @ApiBearerAuth()
   getProfile(@Request() req: any) {

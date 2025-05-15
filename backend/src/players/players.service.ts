@@ -9,23 +9,28 @@ import { TableModel } from '../tables/models/table.model';
 
 @Injectable()
 export class PlayersService {
-  constructor(@InjectRepository(Player)
-  private repo: Repository<Player>,
-    private jwtService: JwtService
-  ) { }
+  constructor(
+    @InjectRepository(Player)
+    private repo: Repository<Player>,
+    private jwtService: JwtService,
+  ) {}
 
   async create(owner: any) {
     let user = await this.repo.findOne({ where: { username: owner.username } });
     if (user != undefined) {
-      throw new BadRequestException("User already exists");
+      throw new BadRequestException('User already exists');
     }
     const salt = await bcrypt.genSalt();
     const hashedPassword = await bcrypt.hash(owner.password, salt);
 
-    const newUser = this.repo.create({ username: owner.username, password: hashedPassword, state: "" });
+    const newUser = this.repo.create({
+      username: owner.username,
+      password: hashedPassword,
+      state: '',
+    });
     const savedUser = await this.repo.save(newUser);
     if (!savedUser) {
-      throw new BadRequestException("User creation failed");
+      throw new BadRequestException('User creation failed');
     }
 
     const payload = { name: newUser.username, sub: newUser.id };
@@ -43,24 +48,23 @@ export class PlayersService {
   }
 
   findOne(id: number) {
-    return this.repo.findOne({ where: { "id": id } });
+    return this.repo.findOne({ where: { id: id } });
   }
 
   getActions() {
     return [
-      { "name": "fold", "description": "description fold" },
-      { "name": "call", "description": "description call" },
-      { "name": "raise", "description": "description raise" },
+      { name: 'fold', description: 'description fold' },
+      { name: 'call', description: 'description call' },
+      { name: 'raise', description: 'description raise' },
     ];
   }
 
   async setAction(name: string, id: number) {
     const user = await this.repo.findOne({ where: { id: id } });
     if (user == undefined) {
-      throw new BadRequestException("User not found");
+      throw new BadRequestException('User not found');
     }
     user.state = name;
-
   }
 
   async createAIPlayer(name: string, table: TableModel): Promise<Player> {
@@ -73,7 +77,9 @@ export class PlayersService {
     while (idExists) {
       const newId = Math.floor(Math.random() * 100); // Generate a random ID
       const existingPlayer = await this.repo.findOne({ where: { id: newId } });
-      const existingAIPlayer = table ? table.players.find(player => player.id === newId && player.isAI) : undefined;
+      const existingAIPlayer = table
+        ? table.players.find((player) => player.id === newId && player.isAI)
+        : undefined;
       if (!existingPlayer && !existingAIPlayer) {
         player.id = newId;
         idExists = false;
@@ -92,7 +98,7 @@ export class PlayersService {
     const playerData = await this.repo.findOne({ where: { id: playerId } });
     player.id = playerId;
     if (!playerData) {
-      throw new BadRequestException("Player not found");
+      throw new BadRequestException('Player not found');
     }
     player.username = playerData.username;
     player.money = playerData.money;
@@ -111,7 +117,7 @@ export class PlayersService {
 
   resetPlayer(player: Player) {
     player.hand = [];
-    player.state = "";
+    player.state = '';
     player.tableId = undefined;
     player.bet = 0;
     return player;

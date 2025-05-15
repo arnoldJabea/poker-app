@@ -7,29 +7,27 @@ import { Card } from '../entities/card.entity';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class UpdateTableDto extends PartialType(CreateTableDto) {
+  @ApiProperty()
+  @IsNotEmpty()
+  deck: Deck = new Deck();
 
-    @ApiProperty()
-    @IsNotEmpty()
-    deck: Deck = new Deck();
+  @IsNotEmpty()
+  @IsString()
+  @ApiProperty({ default: [], isArray: true })
+  players: Player[] = [];
 
-    @IsNotEmpty()
-    @IsString()
-    @ApiProperty({ default: [], isArray: true})
-    players: Player[] = [];
+  @IsString()
+  @IsNotEmpty()
+  @ApiProperty()
+  name: string;
 
-    @IsString()
-    @IsNotEmpty()
-    @ApiProperty()
-    name: string;
+  @IsNotEmpty()
+  @IsString()
+  @ApiProperty({ default: [], isArray: true })
+  river: Card[] = [];
 
-    @IsNotEmpty()
-    @IsString()
-    @ApiProperty({default: [], isArray: true})
-    river: Card[] = [];
-
-    @ApiProperty()
-    @IsNotEmpty()
-    @IsNumber()
-    pot: number = 0;
-   
+  @ApiProperty()
+  @IsNotEmpty()
+  @IsNumber()
+  pot: number = 0;
 }

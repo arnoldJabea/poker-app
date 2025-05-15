@@ -10,8 +10,7 @@ import { ApiBearerAuth, ApiResponse } from '@nestjs/swagger';
 @ApiResponse({ status: 403, description: 'Forbidden.' })
 @Controller('player')
 export class PlayersController {
-  constructor(private readonly playersService: PlayersService) { }
-
+  constructor(private readonly playersService: PlayersService) {}
 
   @Get(':username')
   findByUsername(@Param('username') username: string) {

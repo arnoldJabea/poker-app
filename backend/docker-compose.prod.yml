@@ -6,11 +6,11 @@ services:
       context: ./backend
       dockerfile: Dockerfile.prod
     ports:
-      - "3000:3000"
+      - '3000:3000'
 
   frontend:
     build:
       context: ./frontend
       dockerfile: Dockerfile.prod
     ports:
-      - "4200:80"
+      - '4200:80'
