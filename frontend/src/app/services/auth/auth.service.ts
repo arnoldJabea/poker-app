@@ -17,13 +17,11 @@ export class AuthService {
   private sessionSubject = new BehaviorSubject<{
     prenom: string;
     nom: string;
-    representant?: string;
     role: string;
     isAuthenticated: boolean;
   }>({
     prenom: '',
     nom: '',
-    representant: '',
     role: '',
     isAuthenticated: false
   });
