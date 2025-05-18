@@ -1,7 +1,11 @@
+// =====================================================================
+// Importing Angular modules and third-party dependencies
+// =====================================================================
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
@@ -11,18 +15,28 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatToolbarModule } from '@angular/material/toolbar';
+
 import { AuthService } from '../../../services/auth/auth.service';
 
+// =====================================================================
+// Defining constants for visibility management
+// =====================================================================
 const VISIBILITY = {
   VISIBLE: 'visibility',
   INVISIBLE: 'visibility_off',
 };
 
+// =====================================================================
+// Defining constants for password input field type
+// =====================================================================
 const VISIBILITY_TYPE = {
   VISIBLE: 'text',
   INVISIBLE: 'password',
 };
 
+// =====================================================================
+// LoginComponent Component Declaration
+// =====================================================================
 @Component({
   selector: 'app-login',
   standalone: true,
@@ -43,6 +57,10 @@ const VISIBILITY_TYPE = {
   styleUrl: './login.component.scss'
 })
 export class LoginComponent {
+  // ---------------------------------------------------------------------
+  // Component constructor
+  // Injecting the services UsersService, Router and MatSnackBar
+  // ---------------------------------------------------------------------
   constructor(
     private authService: AuthService,
     private router: Router,
@@ -81,6 +99,10 @@ export class LoginComponent {
     }
   }
 
+  // ---------------------------------------------------------------------
+  // Method: togglePasswordVisibility
+  // Toggles the password display between visible and hidden
+  // ---------------------------------------------------------------------
   togglePasswordVisibility() {
     if (this.passwordVisibility === VISIBILITY.INVISIBLE) {
       this.passwordInputType = VISIBILITY_TYPE.VISIBLE;

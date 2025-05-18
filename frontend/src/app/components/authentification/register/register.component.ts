@@ -37,7 +37,7 @@ const VISIBILITY_TYPE = {
 };
 
 // =====================================================================
-// RegisterGeneraleComponent Component Declaration
+// RegisterComponent Component Declaration
 // =====================================================================
 @Component({
   selector: 'app-register',
