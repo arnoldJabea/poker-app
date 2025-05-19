@@ -1,35 +1,27 @@
-<!-- Main container of the page -->
-<div>
+<div class="ml-2 mr-2 mt-2 mb-2">
+  <h1>Bienvenue au Poker</h1>
+  <p>
+    Ce site de poker en ligne vous plonge dans l'univers des cartes et des stratégies.
+  </p>
+</div>
 
-  <!-- Section: Presentation of Poker -->
-  <div class="ml-2 mr-2 mt-2 mb-2">
-    <h1>Bienvenue au Poker</h1>
-    <p>
-      Que vous soyez un amateur passionné ou un joueur aguerri, ce site de poker en ligne vous plonge dans l'univers
-      palpitant des cartes et des stratégies, où chaque mise peut changer le cours de la partie.
-    </p>
-  </div>
+<div class="row-no-width h-space-around ml-2 mr-2 mt-2 mb-2">
 
-  <div class="row-no-width h-space-around ml-2 mr-2 mt-2 mb-2">
+  <mat-card class="w-30" *ngFor="let player of players">
+    <mat-card-header>
+      <mat-card-title>{{ player.username }}</mat-card-title>
+      <mat-card-subtitle>ID: {{ player.id }}</mat-card-subtitle>
+    </mat-card-header>
 
-    <mat-card class="w-30">
-      <img mat-card-image src="assets/images/sun_set_picture.png" alt="Random picture">
-      <mat-card-content>
-        <p>
-          Démarrer une partie
-        </p>
-      </mat-card-content>
-    </mat-card>
+    <mat-card-content>
+      <p>Argent : {{ player.money }}$</p>
+    </mat-card-content>
 
-    <mat-card class="w-30">
-      <img mat-card-image src="assets/images/sun_set_picture.png" alt="Random picture">
-      <mat-card-content>
-        <p>
-          Rejoindre une partie
-        </p>
-      </mat-card-content>
-    </mat-card>
-
-  </div>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" (click)="giveMoney(player.id)">
+        💰 Motherlode
+      </button>
+    </mat-card-actions>
+  </mat-card>
 
 </div>

@@ -4,6 +4,8 @@ import { enableProdMode } from '@angular/core';
 import { appConfig } from './app/app.config';
 import { AppComponent } from './app/app.component';
 import { environment } from './environments/environment';
+import 'zone.js';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 bootstrapApplication(AppComponent, appConfig)
   .catch((err) => console.error(err));

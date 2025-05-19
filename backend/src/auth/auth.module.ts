@@ -17,9 +17,8 @@ import { PlayersModule } from '../players/players.module';
       signOptions: { expiresIn: '3660s' },
     }),
   ],
-  providers: [AuthService,
-    { provide: APP_GUARD, useClass: AuthGuard }
-  ],
+  providers: [AuthService],
+   
   controllers: [AuthController],
   exports: [AuthService],
 })

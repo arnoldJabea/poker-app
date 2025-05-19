@@ -1,0 +1,27 @@
+<mat-card class="dashboard-card">
+  <div class="text-center avatar-container">
+    <img [src]="avatarUrl" alt="Avatar" class="avatar-img" />
+    <h1 class="text-center">Bienvenue, {{ player?.username }} !</h1>
+  </div>
+
+  <div class="text-center">
+    <h2>{{ player?.money }} $</h2>
+    <button mat-raised-button color="accent" (click)="handleMotherlode()" [disabled]="loading">
+      Motherlode 💰
+    </button>
+  </div>
+
+  <div class="cards-container text-center mt-4" *ngIf="playerCards.length">
+    <h3>Vos cartes</h3>
+    <div class="player-cards">
+      <img *ngFor="let card of playerCards"
+           [src]="'assets/cards/' + card"
+           alt="Carte"
+           class="card-img" />
+    </div>
+  </div>
+
+  <div *ngIf="error" class="error mt-2 text-center">
+    {{ error }}
+  </div>
+</mat-card>

@@ -115,4 +115,11 @@ export class PlayersService {
     player.bet = 0;
     return player;
   }
-}
+  async findById(id: number): Promise<Player> {
+    const player = await this.repo.findOne({ where: { id } });
+    if (!player) {
+      throw new BadRequestException("Player not found");
+    }
+    return player;
+  }
+} 

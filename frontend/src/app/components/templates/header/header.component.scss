@@ -1,92 +1,54 @@
-.navbar {
-  background-color: #adb5bd;
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1rem;
+  height: 64px;
+  background: #1a1a1a;
+  color: white;
 }
 
-.spacer {
-  flex: 1 1 auto;
+.app-title {
+  font-size: 1.5rem;
+  cursor: pointer;
 }
 
-.tiny-spacer {
-  flex: 0.01 1 auto;
+.menu-desktop {
+  display: flex;
+  gap: 12px;
+
+  button {
+    font-weight: bold;
+  }
 }
 
-.tiny-text {
-  font-size: 14px;
+.menu-mobile {
+  display: none;
+  flex-direction: column;
+  background-color: #2a2a2a;
+  padding: 1rem;
+
+  button {
+    margin-bottom: 0.5rem;
+    color: white;
+    text-align: left;
+  }
 }
 
-#mobile-nav {
+.mobile-toggle {
   display: none;
 }
 
-// Sidenav
-#sidenav {
-  height: 100%;
-  width: 0;
-  position: fixed;
-  z-index: 2;
-  top: 0;
-  left: 0;
-  background-color: #111;
-  /* Black*/
-  opacity: 0.98;
-  overflow-x: hidden;
-  padding-top: 60px;
-  transition: 0.5s;
-
-  .mobile-session-text {
-    padding-left: 32px;
-  }
-
-  a {
-    padding: 8px 0 0 0;
-    text-decoration: none;
-    font-size: 25px;
-    display: block;
-    transition: 0.3s;
-    color: #f1f1f1;
-
-    &:hover {
-      color: #7b9bb4;
-    }
-
-    &.active-mobile-link {
-      color: #7b9bb4;
-    }
-  }
-
-  #close-btn {
-    position: absolute;
-    top: 0;
-    right: 25px;
-    font-size: 36px;
-    margin-left: 50px;
-  }
-
-  #username {
-    position: absolute;
-    top: 8px;
-    font-size: 16px;
-  }
-
-  #logout {
-    position: absolute;
-    top: 32px;
-    font-size: 16px;
-  }
-
-  .relative-icon {
-    position: relative;
-    top: 5px;
-  }
-}
-
-@media screen and (max-width: 980px) {
-  #mobile-nav {
-    display: block;
-  }
-
-  #nav-info,
-  #session-info {
+@media (max-width: 768px) {
+  .menu-desktop {
     display: none;
+  }
+
+  .mobile-toggle {
+    display: block;
+  }
+
+  .menu-mobile {
+    display: flex;
   }
 }

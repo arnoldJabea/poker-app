@@ -1,57 +1,38 @@
-<!-- Main toolbar -->
-<mat-toolbar>
+<mat-toolbar color="primary" class="toolbar">
+  <!-- Logo ou titre -->
+  <span class="app-title" (click)="redirectHome()">🃏 Poker Game</span>
 
-  <!-- Main navigation bar -->
-  <mat-toolbar-row class="mat-elevation-z2 navbar">
+  <!-- Icône de menu visible en mobile -->
+  <button
+    mat-icon-button
+    class="mobile-toggle"
+    (click)="toggleMenu()"
+    aria-label="Ouvrir le menu"
+  >
+    <mat-icon>menu</mat-icon>
+  </button>
 
-    <!-- App logo -->
-    <img src="assets/images/poker_cards.png" class="img_logo" width="50" height="50px" alt="logo poker" />
+  <!-- Menu principal desktop -->
+  <div class="menu-desktop">
+    <ng-container *ngIf="session.isAuthenticated; else notConnected">
+      <button mat-button color="accent" (click)="logout()">Déconnexion</button>
+    </ng-container>
 
-    <!-- Spacer between logo and menu -->
-    <span class="tiny-spacer"></span>
-
-    <!-- Main navigation links -->
-    <div id="nav-info">
-      <a mat-button (click)="redirectHome()">Accueil</a>
-    </div>
-
-      <!-- Spacer between navigation and session -->
-      <span class="spacer"></span>
-
-      <!-- Checking user session status -->
-      <ng-container *ngIf="!session.isAuthenticated; else connectedSection">
-
-      <!-- If user is not authenticated, show registration and login links -->
-      <div id="session-info">
-        <a mat-button color="primary" (click)="redirectRegister()">S'inscrire</a>
-        <a mat-button color="primary" (click)="redirectLogin()">Se Connecter</a>
-      </div>
-
-      </ng-container>
-
-      <!-- If the user is logged in, display their first name, last name and a logout button -->
-      <ng-template #connectedSection>
-
-        <div id="session-info">
-          <!-- Display of the first and last name of the connected user -->
-          <span class="tiny-text">{{ session.prenom }} {{ session.nom }}</span>
-
-          <!-- Logout button with an icon -->
-          <button mat-icon-button (click)="logout()">
-          <mat-icon>logout</mat-icon>
-        </button>
-
-          <!-- Logout link -->
-          <span class="tiny-text cursor-pointer" (click)="logout()">Déconnexion</span>
-        </div>
-
-      </ng-template>
-
-      <!-- Mobile menu button to display navigation on small screens -->
-      <button id="mobile-nav" mat-icon-button (click)="openSidenav()">
-      <mat-icon>menu</mat-icon>
-    </button>
-
-  </mat-toolbar-row>
-
+    <ng-template #notConnected>
+      <button mat-button color="accent" (click)="redirectLogin()">Connexion</button>
+      <button mat-button color="warn" (click)="redirectRegister()">Inscription</button>
+    </ng-template>
+  </div>
 </mat-toolbar>
+
+<!-- Menu mobile déroulant -->
+<div class="menu-mobile" *ngIf="menuOpen">
+  <ng-container *ngIf="session.isAuthenticated; else mobileNotConnected">
+    <button mat-button (click)="logout()">Déconnexion</button>
+  </ng-container>
+
+  <ng-template #mobileNotConnected>
+    <button mat-button (click)="redirectLogin()">Connexion</button>
+    <button mat-button (click)="redirectRegister()">Inscription</button>
+  </ng-template>
+</div>

@@ -1,126 +1,25 @@
-<!-- Main container of the page -->
-<div class="container">
+<div class="register-container">
+  <img src="assets/images/poker_cards.png" class="form-image"  alt="Inscription poker" />
+  <h1>Bienvenue au Poker</h1>
+  <h2>Inscription</h2>
 
-  <!-- Main container of the registration form -->
-  <div class="row v-flex hv-center mt-4 mb-4">
+  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Nom d'utilisateur</mat-label>
+      <input matInput formControlName="username" required />
+    </mat-form-field>
 
-    <!-- Centered area for registration card -->
-    <div class="row hv-center">
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Mot de passe</mat-label>
+      <input matInput type="password" formControlName="password" required />
+    </mat-form-field>
 
-      <!-- Card containing the General Registration form -->
-      <mat-card class="w-50 card_register">
-        <h1 class="text-center">Inscription</h1>
-
-        <!-- Reactive form linked to "registerForm" -->
-        <form class="row v-flex" [formGroup]="registerForm" (ngSubmit)="register()">
-
-          <!-- "Your username" field -->
-          <mat-form-field appearance="outline" class="form_username ml-2 mr-2">
-            <mat-label>Nom d'utilisateur</mat-label>
-            <mat-icon matPrefix>account_circle</mat-icon>
-            <input matInput type="text" formControlName="username" />
-            <mat-error *ngIf="registerForm.get('username')?.hasError('required')">
-              Le nom d'utilisateur est <strong>requis</strong>.
-            </mat-error>
-          </mat-form-field>
-
-          <!-- "Your name" field -->
-          <mat-form-field class="form_nom ml-2 mr-2" appearance="outline">
-            <mat-label>Votre nom</mat-label>
-            <mat-icon matPrefix class="mr-1">account_circle</mat-icon>
-            <input matInput type="text" formControlName="nom" />
-            <mat-error *ngIf="registerForm.get('nom')?.hasError('required')">
-              Le nom est <strong>requis</strong>.
-            </mat-error>
-          </mat-form-field>
-
-          <!-- "Your first name" field -->
-          <mat-form-field class="form_prenom ml-2 mr-2" appearance="outline">
-            <mat-label>Votre prenom</mat-label>
-            <mat-icon matPrefix class="mr-1">account_circle</mat-icon>
-            <input matInput type="text" formControlName="prenom" />
-            <mat-error *ngIf="registerForm.get('prenom')?.hasError('required')">
-              Le prenom est <strong>requis</strong>.
-            </mat-error>
-          </mat-form-field>
-
-          <!-- "Date of birth" field with datepicker -->
-          <mat-form-field class="form_date_naissance ml-2 mr-2" appearance="outline">
-            <mat-label>Date de naissance</mat-label>
-            <mat-icon matPrefix class="mr-1">calendar_today</mat-icon>
-            <input matInput [matDatepicker]="picker" formControlName="date_naissance">
-            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
-            <mat-error *ngIf="registerForm.get('date_naissance')?.hasError('required')">
-              La date de naissance est <strong>requise</strong>.
-            </mat-error>
-          </mat-form-field>
-
-          <!-- "Your country" field -->
-          <mat-form-field class="form_pays ml-2 mr-2" appearance="outline">
-            <mat-label>Votre pays</mat-label>
-            <mat-icon matPrefix class="mr-1">location_on</mat-icon>
-            <input matInput type="text" formControlName="pays" />
-            <mat-error *ngIf="registerForm.get('pays')?.hasError('required')">
-              Le pays est <strong>requis</strong>.
-            </mat-error>
-          </mat-form-field>
-
-          <!-- "Your email" field -->
-          <mat-form-field class="form_email ml-2 mr-2" appearance="outline">
-            <mat-label>Votre email</mat-label>
-            <mat-icon matPrefix class="mr-1">mail</mat-icon>
-            <input matInput type="email" formControlName="email" />
-            <mat-error *ngIf="registerForm.get('email')?.hasError('required')">
-              L'email est <strong>requis</strong>.
-            </mat-error>
-          </mat-form-field>
-
-          <!-- "Choose your password" field -->
-          <mat-form-field class="form_mdp ml-2 mr-2" appearance="outline">
-            <mat-label>Choisissez votre mot de passe</mat-label>
-            <mat-icon matPrefix class="mr-1">key</mat-icon>
-            <input matInput [type]="passwordInputType" formControlName="password" />
-            <mat-icon matSuffix class="cursor-pointer" (click)="togglePasswordVisibility()">
-              {{ passwordVisibility }}
-            </mat-icon>
-            <mat-error *ngIf="registerForm.get('password')?.hasError('required')">
-              Le mot de passe est <strong>requis</strong>.
-            </mat-error>
-          </mat-form-field>
-
-          <!-- "Password Confirmation" field -->
-          <mat-form-field class="form_confirm_mdp ml-2 mr-2" appearance="outline">
-            <mat-label>Confirmation du mot de passe</mat-label>
-            <mat-icon matPrefix class="mr-1">key</mat-icon>
-            <input matInput [type]="confirmPasswordInputType" formControlName="confirm_password" />
-            <mat-icon matSuffix class="cursor-pointer" (click)="toggleConfirmPasswordVisibility()">
-              {{ confirmPasswordVisibility }}
-            </mat-icon>
-            <mat-error *ngIf="registerForm.get('confirm_password')?.hasError('required')">
-              Le mot de passe est <strong>requis</strong>.
-            </mat-error>
-          </mat-form-field>
-
-          <!-- Form submit button -->
-          <div class="row hv-center mb-3">
-            <button class="bouton_inscrire" type="submit" mat-raised-button color="primary"
-              [disabled]="!registerForm.valid || isSubmitting">
-              S'inscrire
-            </button>
-          </div>
-
-        </form>
-
-      </mat-card>
-
+    <div *ngIf="errorMessage" class="error">
+      {{ errorMessage }}
     </div>
 
-    <!-- Indication of mandatory fields -->
-    <div class="ml-2 mr-2 mb-2">
-      <p>( * ) Champs obligatoires.</p>
-    </div>
-
-  </div>
-
+    <button mat-raised-button color="primary" type="submit">
+      Créer mon compte
+    </button>
+  </form>
 </div>

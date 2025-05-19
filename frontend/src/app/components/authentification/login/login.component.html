@@ -51,6 +51,11 @@
           </mat-card>
         </form>
 
+        <!-- Message d'erreur global -->
+        <div *ngIf="errorMessage" class="mt-2 text-center">
+          <span class="error-text">{{ errorMessage }}</span>
+        </div>
+
       </mat-card>
     </div>
 

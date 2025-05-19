@@ -4,13 +4,13 @@ import { ClassSerializerInterceptor } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
 import { LoggerInterceptorInterceptor } from './logger-interceptor/logger-interceptor.interceptor';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
-
+import * as crypto from 'crypto';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.useGlobalInterceptors(new ClassSerializerInterceptor(app.get(Reflector)));
   app.useGlobalInterceptors(new LoggerInterceptorInterceptor());
-  require('dotenv').config();
+  
   // CORS
    app.enableCors({
     origin: '*', // ou spécifie "http://localhost:4200"

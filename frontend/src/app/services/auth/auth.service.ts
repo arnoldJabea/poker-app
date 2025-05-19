@@ -1,55 +1,59 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
-import { lastValueFrom } from 'rxjs';
-import { BehaviorSubject } from 'rxjs';
+import { lastValueFrom, BehaviorSubject } from 'rxjs';
+import { AuthSession } from './auth-session.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   baseurl = `${environment.backend_url}/auth`;
-
-  constructor(private http: HttpClient) { }
-
   private accessTokenKey = 'access_token';
 
-  private sessionSubject = new BehaviorSubject<{
-    prenom: string;
-    nom: string;
-    representant?: string;
-    role: string;
-    isAuthenticated: boolean;
-  }>({
+  private sessionSubject = new BehaviorSubject<AuthSession>({
     prenom: '',
     nom: '',
-    representant: '',
     role: '',
     isAuthenticated: false
   });
 
   public session$ = this.sessionSubject.asObservable();
 
+  constructor(private http: HttpClient) { }
+
   async login(credentials: { username: string; password: string }): Promise<{ access_token: string }> {
-    const response = await lastValueFrom(this.http.post<{ access_token: string }>(
-      `${this.baseurl}/signIn`, credentials
-    ));
+    const response = await lastValueFrom(
+      this.http.post<{ access_token: string }>(`${this.baseurl}/signIn`, credentials)
+    );
+    this.setSessionToken(response.access_token);
+    this.sessionSubject.next({
+      prenom: '',
+      nom: '',
+      role: '',
+      isAuthenticated: true
+    });
     return response;
   }
 
-  async signUp(data: {
-    username: string;
-    password: string;
-    email: string;
-    nom: string;
-    prenom: string;
-    pays: string;
-    date_naissance: string;
-  }): Promise<{ access_token: string }> {
-    const response = await lastValueFrom(this.http.post<{ access_token: string }>(
-      `${this.baseurl}/signUp`, data
-    ));
+  async signUp(data: { username: string; password: string }): Promise<{ access_token: string }> {
+    const response = await lastValueFrom(
+      this.http.post<{ access_token: string }>(`${this.baseurl}/signUp`, data)
+    );
+    this.setSessionToken(response.access_token);
+    this.sessionSubject.next({
+      prenom: '',
+      nom: '',
+      role: '',
+      isAuthenticated: true
+    });
     return response;
+  }
+  async getProfile(): Promise<any> {
+    const headers = {
+      Authorization: `Bearer ${this.getToken()}`,
+    };
+    return await lastValueFrom(this.http.get(`${this.baseurl}/profile`, { headers }));
   }
 
   setSessionToken(token: string) {
@@ -62,6 +66,12 @@ export class AuthService {
 
   logout() {
     localStorage.removeItem(this.accessTokenKey);
+    this.sessionSubject.next({
+      prenom: '',
+      nom: '',
+      role: '',
+      isAuthenticated: false
+    });
   }
 
   isAuthenticated(): boolean {

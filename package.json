@@ -1,0 +1,12 @@
+{
+  "devDependencies": {
+    "@nestjs/testing": "^11.1.1",
+    "@types/jest": "^29.5.14",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.3.3"
+  },
+  "dependencies": {
+    "@angular/animations": "^19.2.11",
+    "@angular/router": "^19.2.11"
+  }
+}

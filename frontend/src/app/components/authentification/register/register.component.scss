@@ -1,23 +1,34 @@
-/**************************************************************************************************************************/
+.register-container {
+  max-width: 400px;
+  margin: 50px auto;
+  padding: 20px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 
-.snackbar-success {
-  background-color: #4caf50; /* Vert pour succès */
-  color: white;
-}
-
-.snackbar-error {
-  background-color: #f44336; /* Rouge pour erreur */
-  color: white;
-}
-
-/**************************************************************************************************************************/
-
-@media screen and (max-width: 650px) {
-
-  .card_register {
-    width: 75%;
+  h2 {
+    text-align: center;
+    margin-bottom: 24px;
   }
 
-}
+  .full-width {
+    width: 100%;
+    margin-bottom: 16px;
+  }
 
-/**************************************************************************************************************************/
+  .error {
+    color: red;
+    margin-bottom: 12px;
+    text-align: center;
+  }
+
+  button {
+    width: 100%;
+  }
+
+  .form-image {
+    width: 100%;
+    margin-bottom: 20px;
+    border-radius: 6px;
+  }
+}

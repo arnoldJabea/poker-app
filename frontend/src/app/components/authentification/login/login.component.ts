@@ -66,12 +66,12 @@ export class LoginComponent {
       const response = await this.authService.login({ username, password });
 
       if (response.access_token) {
-        this.authService.setSessionToken(response.access_token); // Stockage du token JWT
+        this.authService.setSessionToken(response.access_token); 
         this.snackBar.open("Connexion réussie !", "Fermer", {
           duration: 5000,
           panelClass: ['snackbar-success'],
         });
-        this.router.navigate(['/accueil']);
+        this.router.navigate(['/home']); 
       }
     } catch (error) {
       this.snackBar.open("Erreur lors de la connexion : identifiants invalides", "Fermer", {
@@ -90,4 +90,5 @@ export class LoginComponent {
       this.passwordVisibility = VISIBILITY.INVISIBLE;
     }
   }
+  errorMessage = '';
 }
