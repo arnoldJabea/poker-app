@@ -9,7 +9,7 @@ import { lastValueFrom } from 'rxjs';
 export class PlayersService {
   baseurl = `${environment.backend_url.replace(/\/$/, '')}/player`;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   async findAll(): Promise<any> {
     return await lastValueFrom(this.http.get<any>(`${this.baseurl}`));
@@ -22,7 +22,8 @@ export class PlayersService {
   async motherlode(playerId: number): Promise<any> {
     return await lastValueFrom(this.http.get<any>(`${this.baseurl}/motherlode/${playerId}`));
   }
-   async getMe(): Promise<any> {
-    return await lastValueFrom(this.http.get(`${this.baseurl}/me`));
+
+  async getMe(): Promise<any> {
+    return await lastValueFrom(this.http.get<any>(`${this.baseurl}/me`));
   }
 }

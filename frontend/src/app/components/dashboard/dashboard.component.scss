@@ -40,3 +40,33 @@
 .mt-2 {
   margin-top: 1rem;
 }
+.dashboard-card {
+  margin: 2rem auto;
+  padding: 2rem;
+  max-width: 600px;
+  text-align: center;
+  background: #f7f7f7;
+  border-radius: 15px;
+}
+
+.avatar-container {
+  margin-bottom: 1rem;
+
+  .avatar-img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin: auto;
+    display: block;
+  }
+}
+
+.player-cards {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
+
+ 
+}
+

@@ -13,7 +13,7 @@ import { MatButtonModule } from '@angular/material/button';
 })
 export class DashboardComponent implements OnInit {
   player: any = null;
-  playerCards: string[] = ['2_of_clubs.svg', '10_of_hearts.svg', 'ace_of_spades.svg']; // 👈 ajout ici
+  playerCards: string[] = []; 
   loading: boolean = false;
   error: string = '';
 
@@ -28,7 +28,9 @@ export class DashboardComponent implements OnInit {
       this.loading = true;
       const response = await this.playersService.getMe();
       this.player = response;
-      console.log('🎯 Joueur connecté :', this.player);
+
+     
+      this.playerCards = ['2_of_clubs.svg', '10_of_hearts.svg', 'ace_of_spades.svg'];
     } catch (err) {
       this.error = 'Erreur lors du chargement du joueur';
     } finally {

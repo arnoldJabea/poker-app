@@ -1,42 +1,33 @@
-import { Exclude, Expose } from 'class-transformer';
-import { IsNumber } from 'class-validator';
-import { Card } from 'src/tables/entities/card.entity';
+// player.entity.ts
 import { Entity, Column, PrimaryGeneratedColumn, AfterInsert } from 'typeorm';
-
+import { Exclude } from 'class-transformer';
 
 @Entity()
 export class Player {
-    name(name: any) {
-        throw new Error('Method not implemented.');
-    }
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @PrimaryGeneratedColumn()
-    id: number
+  @Column()
+  username: string;
 
-    @Column()
-    username: string;
+  @Column()
+  @Exclude()
+  password: string;
 
-    @Column()
-    @Exclude()
-    password: string = '';
+  @Column({ default: 1000 })
+  money: number;
 
-    state: string = '';
+  @Column({ default: '' })
+  state: string;
 
-    @IsNumber()
-    @Column({ default: 1000 })
-    money: number = 1000;
+  @Column({ type: 'simple-array', nullable: true })
+  cards: string[];
 
-    bet: number = 0;
+  @Column({ default: false })
+  isAI: boolean;
 
-    hand: Card[] = [];
-
-    tableId: number | undefined;
-
-    isAI: boolean = false;
-
-    @AfterInsert()
-    after_insert() { //Se déclenche automatiquement après l'insertion
-        console.log(`Player ${this.id} created`)
-    }
-
+  @AfterInsert()
+  after_insert() {
+    console.log(`Player ${this.id} created`);
+  }
 }

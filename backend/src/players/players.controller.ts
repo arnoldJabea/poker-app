@@ -1,6 +1,8 @@
-import { Controller, Get, Param } from '@nestjs/common';
+import { Controller, Get, Param, Req, UseGuards } from '@nestjs/common';
 import { PlayersService } from './players.service';
 import { ApiResponse } from '@nestjs/swagger';
+import { AuthGuard } from 'src/auth/AuthGuard';
+import { Request } from 'express';
 
 @ApiResponse({
   status: 200,
@@ -8,7 +10,7 @@ import { ApiResponse } from '@nestjs/swagger';
 })
 @Controller('player')
 export class PlayersController {
-  constructor(private readonly playersService: PlayersService) { }
+  constructor(private readonly playersService: PlayersService) {}
 
   @Get(':username')
   findByUsername(@Param('username') username: string) {
@@ -26,9 +28,14 @@ export class PlayersController {
   }
 
   @Get('me')
-  //@UseGuards(JwtAuthGuard)
-  async getMe(@Request() req: any) {
-    const player = await this.playersService.findById(req.user.id);
-    return player; // ✅ renvoie l'objet complet
+  @UseGuards(AuthGuard)
+  async getMe(@Req() req: Request) {
+    const player = await this.playersService.findById(req.user['userId']);
+    return {
+      id: player.id,
+      username: player.username,
+      money: player.money,
+      cards: player.cards ?? []
+    };
   }
 }

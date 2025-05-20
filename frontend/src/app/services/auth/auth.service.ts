@@ -8,6 +8,9 @@ import { AuthSession } from './auth-session.model';
   providedIn: 'root'
 })
 export class AuthService {
+  getSessionToken() {
+      throw new Error('Method not implemented.');
+  }
   baseurl = `${environment.backend_url}/auth`;
   private accessTokenKey = 'access_token';
 
